@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Renseignez votre recherche</h1>
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                {{ form_start(form) }}
+                {{ form_label(form.search) }}
+                <div class="input-group mb-6">
+                    {{ form_widget(form.search) }}
+                    <a  href="{{ path('car_search') }}"
+                        class="btn btn-outline-primary">
+                        Reset
+                    </a>
+                </div>
+                {{ form_label(form.categories) }}
+                <div class="input-group mb-6">
+                    {{ form_widget(form.categories) }}
+                    <button
+                            class="btn btn-outline-primary" type="submit">
+                        {{ button_label|default('Soumettre') }}
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    {% if app.request.method == 'GET' and form.search.vars.value is not empty %}
+        <div class="container-fluid mt-4">
+        <div class="row">
+        {% if cars | length == 0 %}
+            <h2>Aucun résultat pour votre recherche</h2>
+        {% else %}
+            <h2 class="mt-4">Résultats de la recherche</h2>
+            <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nom du modèle</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for car in cars %}
+                <tr>
+                    <td>{{ car.name }}</td>
+                </tr>
+
+            {% endfor %}
+        {% endif %}
+        </tbody>
+        </table>
+        {{ knp_pagination_render(cars) }}
+    {% endif %}
+{% endblock %}

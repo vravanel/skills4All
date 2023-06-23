@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Voiture{% endblock %}
+
+{% block content %}
+    <h1>Voitures</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NbSeats</th>
+                <th>NbDoors</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.nbSeats }}</td>
+                <td>{{ car.nbDoors }}</td>
+                <td>{{ car.name }}</td>
+                <td>{{ car.cost }}</td>
+                <td>
+                    <a href="{{ path('app_admin_car_show', {'id': car.id}) }}">show</a>
+                    <a href="{{ path('app_admin_car_edit', {'id': car.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(cars) }}
+    </div>
+
+    <a href="{{ path('app_admin_car_new') }}">Nouvelle Voiture</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit Car{% endblock %}
+
+{% block content %}
+    <h1>Edit Voiture</h1>
+
+    {{ include('admin/admin_car/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+
+    <a href="{{ path('app_admin_car_index') }}">Retour</a>
+
+    {{ include('admin/admin_car/_delete_form.html.twig') }}
+{% endblock %}

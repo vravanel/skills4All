@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="row text-black">
+    <div class="col-md-6">
+        {{ form_label(form.name, 'Nom de la voiture') }}
+        {{ form_widget(form.name) }}
+    </div>
+    <div class="col-md-3">
+        {{ form_label(form.nbSeats, 'Nombre de sièges') }}
+        {{ form_widget(form.nbSeats) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_label(form.nbDoors, 'Nombre de fenêtres') }}
+        {{ form_widget(form.nbDoors) }}
+    </div>
+    <div class="col-md-3">
+        {{ form_label(form.cost, 'Prix de la voiture') }}
+        {{ form_widget(form.cost) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_label(form.carCategory, 'Catégorie de la voiture') }}
+        {{ form_widget(form.carCategory) }}
+    </div>
+    <div class="col-md-6">
+        <button class="btn btn-success mt-3">{{ button_label|default('Sauvegarder') }}</button>
+    </div>
+
+</div>

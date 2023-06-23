@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Skills Auto{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <script src="https://kit.fontawesome.com/848d5c22f9.js" crossorigin="anonymous"></script>
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body class="min-vh-100 d-flex flex-column">
+{% include('/include/_navbar.html.twig') %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<div class="container">
+    <ul class="nav nav-tabs mt-3">
+        {% set links = [
+            {'title': 'Home',
+                'path': 'app_admin',
+                'controller': 'App\\Controller\\Admin\\AdminController'
+            },
+            {'title': 'Car',
+                'path': 'app_admin_car_index',
+                'controller': 'App\\Controller\\Admin\\CarController'
+            },
+            {'title': 'Category',
+                'path': 'app_admin_category_index',
+                'controller': 'App\\Controller\\Admin\\CarCategoryController'
+            },
+
+        ] %}
+
+        {% set _controller = app.request.attributes.get("_controller")|split('::') %}
+        {% for link in links %}
+            <li class="nav-item">
+                <a href="{{ path(link.path) }}" class="nav-link
+                        {{ link.controller == _controller[0] ? 'active'  }}"
+                        {{ link.controller == _controller[0] ? 'aria-current="page"'  }}>
+                    {{ link.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="py-5 px-3">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

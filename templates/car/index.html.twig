@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Voitures</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Nom du modèle</th>
+            <th>Nombre de fenêtres</th>
+            <th>Nombre de sièges</th>
+            <th>Prix</th>
+            <th>Categorie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for carCategory in carCategories %}
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.name }}</td>
+                <td>{{ car.nbDoors }}</td>
+                <td>{{ car.nbSeats }}</td>
+                <td>{{ car.cost }}</td>
+                <td>
+                    {{ carCategory.name }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(cars) }}
+{% endblock %}
