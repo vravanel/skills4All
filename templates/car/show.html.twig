@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <div class="container d-flex justify-content-center mt-4">
+    <div class="card" style="width: 25rem;">
+        <img src="https://fakeimg.pl/300/" class="card-img-top" alt="{{ car.name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ car.name }}</h5>
+            <ul>
+                <li>
+                    Nombre de sièges : {{ car.nbSeats }}
+                </li>
+                <li>
+                Nombre de fenêtres : {{ car.nbDoors }}
+                </li>
+                <li>
+                    Catégorie du véhicule : {{ car.carCategory.name }}
+                </li>
+            </ul>
+            <strong>{{ car.cost }} euros</strong>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+

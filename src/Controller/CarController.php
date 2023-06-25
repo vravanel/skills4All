@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Car;
 use App\Entity\CarCategory;
 use App\Repository\CarCategoryRepository;
 use App\Repository\CarRepository;
@@ -32,7 +33,7 @@ class CarController extends AbstractController
         ]);
     }
     #[Route('/search', name: 'search', methods : ['GET'])]
-    public function show(CarRepository $carRepository, PaginatorInterface $paginator, Request $request) : Response
+    public function search(CarRepository $carRepository, PaginatorInterface $paginator, Request $request) : Response
     {
         $form = $this->createFormBuilder(null, [
             'method' => 'get',
@@ -75,6 +76,14 @@ class CarController extends AbstractController
         return $this->render('car/search_results.html.twig', [
             'cars' => $pagination,
             'form' => $form,
+        ]);
+    }
+    #[Route('/{id}', name: 'show', methods : ['GET'])]
+    public function show(Car $car) : Response
+    {
+
+        return $this->render('car/show.html.twig', [
+            'car' => $car,
         ]);
     }
 }

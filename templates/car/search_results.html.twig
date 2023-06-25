@@ -42,7 +42,7 @@
             <tbody>
             {% for car in cars %}
                 <tr>
-                    <td>{{ car.name }}</td>
+                    <td><a href="{{ path('car_show', {id : car.id}) }}"> {{ car.name }}</a></td>
                 </tr>
 
             {% endfor %}
